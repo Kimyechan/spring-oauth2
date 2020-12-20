@@ -21,6 +21,7 @@ public class Oauth2Controller {
     private final Gson gson;
     private final RestTemplate restTemplate;
 
+//    http://localhost:8081/oauth/authorize?client_id=testClientId&redirect_uri=http://localhost:8081/oauth2/callback&response_type=code&scope=read
     @GetMapping(value = "/callback")
     public OAuthToken callbackSocial(@RequestParam String code) {
 
