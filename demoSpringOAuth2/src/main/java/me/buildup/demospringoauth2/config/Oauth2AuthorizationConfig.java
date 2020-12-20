@@ -44,10 +44,10 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
     }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(new JdbcTokenStore(dataSource)).userDetailsService(userDetailService);
-    }
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+//        endpoints.tokenStore(new JdbcTokenStore(dataSource)).userDetailsService(userDetailService);
+//    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -62,22 +62,22 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
      * @param endpoints
      * @throws Exception
      */
-//    @Override
-//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//        super.configure(endpoints);
-//        endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailService);
-//    }
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        super.configure(endpoints);
+        endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailService);
+    }
 
     /**
      * jwt converter를 등록
      *
      * @return
      */
-//    @Bean
-//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//        converter.setSigningKey(signKey);
-//        return converter;
-//    }
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey(signKey);
+        return converter;
+    }
 
 }
